@@ -1,36 +1,36 @@
 // CHECK NAMES/PARAMETERS
 
-const Product = require('../models/Product');
+const Shoe = require('../models/Shoe');
 
 async function getAll(query){
-    // let products = await Product.find({}).lean(); ОТПАДА - НЯМА ДА СЕ КАЗВА ТАКА МОДЕЛЪТ
+    let shoes = await Shoe.find({}).lean(); 
 
 
     if(query.search){
-        products = products.filter(x => x.name.toLowerCase().includes(query.search))
+        shoes = shoes.filter(x => x.name.toLowerCase().includes(query.search))
     }
     if(query.from){
-        products = products.filter(x => Number(x.level) >= query.from);
+        shoes = shoes.filter(x => Number(x.level) >= query.from);
     }
     if(query.to){
-        products = products.filter(x => Number(x.level) <= query.to);
+        shoes = shoes.filter(x => Number(x.level) <= query.to);
     }
-    return products;
+    return shoes;
 }
 async function getOne(id){
-    return Product.findById(id).lean();
+    return Shoe.findById(id).lean();
 }
  
 function createProduct(data){
-    //    let product = new Product({...data, creator: userId}); 
-        return product.save()
+    let shoe = new Shoe({...data, creator: userId}); 
+    return shoe.save()
 }
 function updateOne(productId, productData){
-    return Product.updateOne({_id: productId}, productData)
+    return Shoe.updateOne({_id: productId}, productData)
  }
- function deleteOne(productId){
-     return Product.deleteOne({_id: productId})
- }
+function deleteOne(productId){
+    return Shoe.deleteOne({_id: productId})
+}
 module.exports = {
     getAll,
     getOne,
