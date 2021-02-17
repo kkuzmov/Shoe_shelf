@@ -1,10 +1,10 @@
 // CHECKED!!
 
 const config = {
-    PORT: 4401,
+    PORT: 4000,
     SALT_ROUNDS: 10,
     SECRET: 'examSecrets',
-    DB: 'mongodb://localhost/kuzmov_exam',
+    DB: 'mongodb://localhost/shoe_shelf',
     COOKIE_NAME: 'User_session'
 };
 

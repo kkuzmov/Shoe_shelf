@@ -13,7 +13,7 @@ router.use('/', homeController);
 router.use('/auth', authController);
 router.use('/products', productController);
 router.get('*', (req, res)=>{
-    res.render('404')
+    res.status(404).send('<h1 style="background-color:red">Error: 404<br><br>Nothing here</h1>').end();
 })
 
 module.exports = router;

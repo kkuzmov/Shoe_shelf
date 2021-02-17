@@ -5,7 +5,7 @@ const isGuest = require('../middlewares/isGuest')
 
 module.exports = function () {
     return function (req, res, next) {
-        let token = req.cookies[cookieName]
+        let token = req.cookies[COOKIE_NAME]
         if (token) {
             jwt.verify(token, SECRET, function (err, decoded) {
                 if (err) {
