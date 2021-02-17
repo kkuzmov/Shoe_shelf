@@ -7,30 +7,34 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     id: mongoose.Types.ObjectId,
-    username: {
+    email: {
         type: String,
         required: true,
-        validate: {
-            validator: (value) =>{
-                return ENGLISH_ALPHANUMERIC_PATTERN.test(value);
-             },
-            message: (props)=>{
-                return `${props.value} is invalid! Username should consist only of english letters and digits`
-            }
-        }
+        // validate: {
+        //     validator: (value) =>{
+        //         return ENGLISH_ALPHANUMERIC_PATTERN.test(value);
+        //      },
+        //     message: (props)=>{
+        //         return `${props.value} is invalid! Username should consist only of english letters and digits`
+        //     }
+        // }
+    },
+    fullName: {
+        type: String,
     },
     password: {
         type: String,
         required: true,
-        validate: {
-            validator: (value) =>{
-                return ENGLISH_ALPHANUMERIC_PATTERN.test(value);
-             },
-            message: (props)=>{
-                return `Password must consist only of english letters and digits`
-            }
-        }
-    }
+        // validate: {
+        //     validator: (value) =>{
+        //         return ENGLISH_ALPHANUMERIC_PATTERN.test(value);
+        //      },
+        //     message: (props)=>{
+        //         return `Password must consist only of english letters and digits`
+        //     }
+        // }
+    },
+    offersBought: []
 })
 
 
