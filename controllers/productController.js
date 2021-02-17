@@ -8,10 +8,10 @@ const isGuest = require('../middlewares/isGuest');
 const { validateProduct } = require('../controllers/helpers/productHelper'); // валидатор за продукт
 
 router.get('/', (req, res) => {
-  
+        res.render('home')
 })
 router.get('/create', (req, res) => {
-    
+        res.render('create')
 })
 router.post('/create', (req, res) => {
 

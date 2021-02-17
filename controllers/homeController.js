@@ -4,7 +4,6 @@ const { Router } = require('express');
 const router = Router();
 
 router.get('/', (req, res) => {
-    console.log('loaded main and home views')
     res.render('home')
 })
 router.get('/about', (req, res) => {

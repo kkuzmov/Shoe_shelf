@@ -1,2 +1,37 @@
-<h1>This is loaded from MAIN.hbs</h1>
-{{{body}}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>{{title}}</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/products/create">Create New Offer</a>
+                </li>
+                <li class="site-logo">Shoe</li>
+                <li>
+                    <a href="/products">
+                        <img src="/sneakers.png" alt="">
+                    </a>
+                </li>
+                <li class="site-logo">Shelf</li>
+                <li>Welcome, <a href="">Peter Thompson</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {{{body}}}
+    </main>
+    <footer>
+        <p><a href="https://softuni.bg">Software University</a> - JS Back End @ 2020</p>
+    </footer>
+</body>
+
+</html>
