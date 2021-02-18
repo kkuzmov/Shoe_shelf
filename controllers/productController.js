@@ -10,10 +10,10 @@ const { validateProduct } = require('../controllers/helpers/productHelper'); // 
 router.get('/', (req, res) => {
         res.redirect('/')
 })
-router.get('/create', (req, res) => {
+router.get('/create', isAuthenticated, (req, res) => {
         res.render('create', {title: 'Create a new offer'})
 })
-router.post('/create', (req, res) => {
+router.post('/create', isAuthenticated,(req, res) => {
     let dataToSend = {...req.body, creator: req.user._id};
         productService.createProduct(dataToSend)
             .then(createdShoe =>{
@@ -23,7 +23,7 @@ router.post('/create', (req, res) => {
                 res.render('create', {error:{message: err}})
             })
 })
-router.get('/:productId/details', (req, res)=>{
+router.get('/:productId/details', isAuthenticated, (req, res)=>{
         productService.getOne(req.params.productId)
            .then(shoe =>{
                 let isCreator = req.user._id === shoe.creator;
@@ -31,20 +31,20 @@ router.get('/:productId/details', (req, res)=>{
                 res.render('details', {title: 'Product details', shoe, isCreator, isBought})
            })
 })
-router.get('/:productId/edit', (req, res)=>{
+router.get('/:productId/edit', isAuthenticated,(req, res)=>{
         productService.getOne(req.params.productId)
            .then(shoe =>{
                 res.render('edit', {title: 'Product details', shoe})
            })
 })
-router.post('/:productId/edit', (req, res)=>{
+router.post('/:productId/edit', isAuthenticated, (req, res)=>{
         let dataToSend = req.body;
         productService.updateOne(req.params.productId, dataToSend)
            .then(shoe =>{
                 res.redirect(`/products/${req.params.productId}/details`);
            })
 })
-router.get('/:productId/buy', (req, res)=>{
+router.get('/:productId/buy', isAuthenticated, (req, res)=>{
         productService.getOne(req.params.productId)
            .then(shoe =>{
                 let user = req.user;
@@ -56,7 +56,7 @@ router.get('/:productId/buy', (req, res)=>{
                         })
            })
 })
-router.get('/:productId/delete', (req, res)=>{
+router.get('/:productId/delete',isAuthenticated, (req, res)=>{
         productService.deleteOne(req.params.productId)
            .then(deleted =>{
                 res.redirect('/');

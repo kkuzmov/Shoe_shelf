@@ -11,10 +11,10 @@ const productService = require('../services/productService');
 
 //ВТОРИЯТ ПАРАМЕТЪР НА .GET Е MIDDLEWARE - ВНИМАВАЙ ДАЛИ ГО ИЗПОЛЗВАШ!
 
-router.get('/login',(req, res) => {
+router.get('/login', isGuest, (req, res) => {
     res.render('login');
 })
-router.post('/login',async (req, res)=>{
+router.post('/login', isGuest, async (req, res)=>{
     const {email, password} = req.body;
 
     try {
@@ -26,10 +26,10 @@ router.post('/login',async (req, res)=>{
         res.status(404).render('login', {error});
     }
 })
-router.get('/register', (req, res) => {
+router.get('/register', isGuest,  (req, res) => {
     res.render('register', {title: 'Register user'})
 })
-router.post('/register', async (req, res) => {
+router.post('/register', isGuest,  async (req, res) => {
     const {email, fullName, password, rePassword} = req.body;
     if(password !== rePassword){
         res.status(401).render('register', {error:{message: 'Passwords do not match!'}});
@@ -49,11 +49,11 @@ router.post('/register', async (req, res) => {
         return;
 }
 })
-router.get('/logout', (req, res)=>{
+router.get('/logout', isAuthenticated,  (req, res)=>{
     res.clearCookie(COOKIE_NAME);
     res.redirect('/')
 })
-router.get('/profile', (req, res)=>{
+router.get('/profile', isAuthenticated, (req, res)=>{
     let result = 0;
     productService.getAll()
         .then(shoes =>{
