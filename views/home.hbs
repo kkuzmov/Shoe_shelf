@@ -1,5 +1,12 @@
 <div class="container">
     <div class="about-us">
+        {{#if isAuthenticated}}
+        {{#if shoes}}
+        {{> shoe}}
+        {{else}}
+        <span class="no-shoes">No shoes to display. Be the first to create a new offer...</span>
+        {{/if}}
+        {{else}}
         <div>
             <img src="/img/shoes.jpg" alt="">
             <img src="/img/shoes2.jpg" alt="">
@@ -7,5 +14,6 @@
         <p>
            <a href="/auth/register">Register Now</a> and Try it!
         </p>
+        {{/if}}
     </div>
 </div>

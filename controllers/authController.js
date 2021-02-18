@@ -26,7 +26,6 @@ router.post('/login',async (req, res)=>{
     }
 })
 router.get('/register', (req, res) => {
-    console.log(req.user)
     res.render('register', {title: 'Register user'})
 })
 router.post('/register', async (req, res) => {
