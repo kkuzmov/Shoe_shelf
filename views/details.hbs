@@ -11,9 +11,14 @@
         </div>
     </div>
     <div class="actions">
-        <!-- <a href="">Edit</a>
-        <a href="">Delete</a> -->
-        <!-- <a href="">Buy</a> -->
-        <!-- <span>You bought it</span> -->
+        {{#if isCreator}}
+        <a href="/products/{{shoe._id}}/edit">Edit</a>
+        <a href="/products/{{shoe._id}}/delete">Delete</a>
+        {{else}}
+        <a href="">Buy</a>
+        {{/if}}
+        {{#if isBought}}
+        <span>You bought it</span>
+        {{/if}}
     </div>
 </div>

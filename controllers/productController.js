@@ -26,7 +26,21 @@ router.post('/create', (req, res) => {
 router.get('/:productId/details', (req, res)=>{
         productService.getOne(req.params.productId)
            .then(shoe =>{
-                   res.render('details', {title: 'Product details', shoe})
+                let isCreator = req.user._id === shoe.creator;
+                res.render('details', {title: 'Product details', shoe, isCreator})
+           })
+})
+router.get('/:productId/edit', (req, res)=>{
+        productService.getOne(req.params.productId)
+           .then(shoe =>{
+                res.render('edit', {title: 'Product details', shoe})
+           })
+})
+router.post('/:productId/edit', (req, res)=>{
+        let dataToSend = req.body;
+        productService.updateOne(req.params.productId, dataToSend)
+           .then(shoe =>{
+                res.redirect(`/products/${req.params.productId}/details`);
            })
 })
 
