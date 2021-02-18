@@ -45,7 +45,7 @@ router.post('/register', isGuest,  async (req, res) => {
         res.status(404).render('login', {error})
     } 
 } catch (error) {
-        res.status(404).render('register', {error: {message: error.errors.password.properties.message}})
+        res.status(404).render('register', {error})
         return;
 }
 })
