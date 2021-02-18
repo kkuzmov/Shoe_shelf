@@ -340,11 +340,12 @@ form div button:hover {
 }
 
 .shoe {
-    vertical-align: top;
+    vertical-align:baseline;
     height: 25vh;
     padding: 1%;
     margin: 0.5%;
     border-radius: 6px;
+    overflow:inherit;
 }
 
 .shoe:hover {

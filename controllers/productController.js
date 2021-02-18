@@ -23,6 +23,12 @@ router.post('/create', (req, res) => {
                 res.render('create', {error:{message: err}})
             })
 })
+router.get('/:productId/details', (req, res)=>{
+        productService.getOne(req.params.productId)
+           .then(shoe =>{
+                   res.render('details', {title: 'Product details', shoe})
+           })
+})
 
 // CONTROLLER ИЗПОЛЗВА ФУНКЦИИТЕ, СЪЗДАДЕНИ В PRODUCTSERVICE ЗА СЪЗДАВАНЕ ИЛИ ИЗВИКВАНЕ НА ВСИЧКИ ПРОДУКТИ
 // ЧАСТ ОТ EXAM PACKAGE

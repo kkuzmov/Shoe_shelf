@@ -1,10 +1,11 @@
 <div class="container">
-    {{#if isAuthenticated}}
          <div class="shoes">
+    {{#if isAuthenticated}}
         {{#if shoes}}
         {{#each shoes}}
         {{> shoe}}
         {{/each}}
+         </div>
         {{else}}
         <span class="no-shoes">No shoes to display. Be the first to create a new offer...</span>
         {{/if}}
