@@ -22,7 +22,7 @@ async function getOne(id){
 }
  
 function createProduct(data){
-    let shoe = new Shoe({...data, creator: userId}); 
+    let shoe = new Shoe({...data}); 
     return shoe.save()
 }
 function updateOne(productId, productData){

@@ -18,14 +18,23 @@ const productSchema = new mongoose.Schema({
         required: true,
         // validate: /^https?/,
     },
-    brand: {
-        type: String
-    },
-    createdAt:{
-        type: Date || String,
+    description: {
+        type: String,
         required: true,
     },
-    buyers: []
+    brand: {
+        type: String,
+        required: true
+    },
+    createdAt:{ 
+        type: Date,
+        default: Date.now 
+    },
+    buyers: [],
+    creator: {
+        type: String,
+        required: true
+    }
 })
 
 

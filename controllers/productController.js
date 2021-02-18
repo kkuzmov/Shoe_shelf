@@ -14,8 +14,14 @@ router.get('/create', (req, res) => {
         res.render('create', {title: 'Create a new offer'})
 })
 router.post('/create', (req, res) => {
-
-
+    let dataToSend = {...req.body, creator: req.user._id};
+        productService.createProduct(dataToSend)
+            .then(createdShoe =>{
+                    res.redirect('/')
+            })
+            .catch(err =>{
+                res.render('create', {error:{message: err}})
+            })
 })
 
 // CONTROLLER ИЗПОЛЗВА ФУНКЦИИТЕ, СЪЗДАДЕНИ В PRODUCTSERVICE ЗА СЪЗДАВАНЕ ИЛИ ИЗВИКВАНЕ НА ВСИЧКИ ПРОДУКТИ
