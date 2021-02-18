@@ -32,8 +32,7 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
     const {email, fullName, password, rePassword} = req.body;
     if(password !== rePassword){
-        console.log('passwords do not match')
-        res.status(401).render('register', {message: 'Passwords do not match!'});
+        res.status(401).render('register', {error:{message: 'Passwords do not match!'}});
         return;
     }
     try {
@@ -46,7 +45,7 @@ router.post('/register', async (req, res) => {
         res.status(404).render('login', {error})
     } 
 } catch (error) {
-        res.status(404).render('register', {error})
+        res.status(404).render('register', {error: {message: error.errors.password.properties.message}})
         return;
 }
 })

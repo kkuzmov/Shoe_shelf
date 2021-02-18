@@ -4,7 +4,7 @@
 </p>
 <form action="/auth/login" method="POST">
     {{#if error}}
-    {{error.message}}
+        {{#if error}}<div class="error"> <span>{{error.message}}</span></div>{{/if}}
     {{/if}}
     <div>
         <input type="email" name="email" placeholder="Email...">

@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
+        minlength: 3
         // validate: {
         //     validator: (value) =>{
         //         return ENGLISH_ALPHANUMERIC_PATTERN.test(value);
@@ -28,6 +29,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
+        minlength: 3
         // validate: {
         //     validator: (value) =>{
         //         return ENGLISH_ALPHANUMERIC_PATTERN.test(value);

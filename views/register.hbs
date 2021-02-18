@@ -1,10 +1,10 @@
 <h1>Register</h1>
 <p class="form-info">Already registered?
-    <a href="">Login now</a> and have some fun!
+    <a href="/auth/login">Login now</a> and have some fun!
 </p>
 <form action="/auth/register" method="POST">
     {{#if error}}
-   <span style="background-color: red; font-size=18px">{{error.message}}</span> 
+        {{#if error}}<div class="error"> <span>{{error.message}}</span></div>{{/if}}
     {{/if}}
     <div>
         <input type="email" name="email" placeholder="Email...">
