@@ -3,6 +3,9 @@
     <a href="/auth/register">Register now</a> and fix that!
 </p>
 <form action="/auth/login" method="POST">
+    {{#if error}}
+    {{error.message}}
+    {{/if}}
     <div>
         <input type="email" name="email" placeholder="Email...">
     </div>

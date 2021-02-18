@@ -12,16 +12,17 @@
     <header>
         <nav>
             <ul>
-                <li>
-                    <a href="/products/create">Create New Offer</a>
-                </li>
+                {{#if isAuthenticated}}
+                <li><a href="/products/create">Create New Offer</a></li>
                 <li class="site-logo">Shoe</li>
-                <li>
-                    <a href="/products"><img src="/img/sneakers.png" alt="">
-                    </a>
-                </li>
+                <li><a href="/products"><img src="/img/sneakers.png" alt=""></a></li>
                 <li class="site-logo">Shelf</li>
-                <li>Welcome, <a href="/auth/profile">Peter Thompson</a></li>
+                <li>Welcome, <a href="/auth/profile">{{user.fullName}}</a></li>
+                {{else}}
+                <li class="site-logo">Shoe</li>
+                <li><a href="/products"><img src="/img/sneakers.png" alt=""></a></li>
+                <li class="site-logo">Shelf</li>
+                {{/if}}
             </ul>
         </nav>
     </header>

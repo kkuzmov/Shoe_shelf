@@ -3,6 +3,9 @@
     <a href="">Login now</a> and have some fun!
 </p>
 <form action="/auth/register" method="POST">
+    {{#if error}}
+   <span style="background-color: red; font-size=18px">{{error.message}}</span> 
+    {{/if}}
     <div>
         <input type="email" name="email" placeholder="Email...">
     </div>

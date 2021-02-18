@@ -14,10 +14,10 @@ router.get('/login',(req, res) => {
     res.render('login');
 })
 router.post('/login',async (req, res)=>{
-    const {username, password} = req.body;
+    const {email, password} = req.body;
 
     try {
-        let token = await authService.login({username, password})
+        let token = await authService.login({email, password})
 
         res.cookie(COOKIE_NAME, token, {httpOnly: true});
         res.redirect('/products')
@@ -25,25 +25,30 @@ router.post('/login',async (req, res)=>{
         res.status(404).render('login', {error});
     }
 })
-router.get('/register',(req, res) => {
-    res.render('register')
+router.get('/register', (req, res) => {
+    console.log(req.user)
+    res.render('register', {title: 'Register user'})
 })
-router.post('/register',async (req, res) => {
-    const {username, password, repeatPassword } = req.body;
-
-    // AKO E НУЖНО ВЕДНАГА ДА Е ЛОГНАТ, ПРОВЕРИ В BOOKING_UNI - ТАМ Е НАСТРОЕНО
-
-    if(password !== repeatPassword){
+router.post('/register', async (req, res) => {
+    const {email, fullName, password, rePassword} = req.body;
+    if(password !== rePassword){
+        console.log('passwords do not match')
         res.status(401).render('register', {message: 'Passwords do not match!'});
         return;
     }
     try {
-        let user = await authService.register({username, password});
-        res.redirect('/auth/login')
+        let user = await authService.register({email, fullName, password});
+    try {
+        let token = await authService.login({email, password})
+        res.cookie(COOKIE_NAME, token);
+        res.redirect('/')
     } catch (error) {
-        res.status(401).render('register', {error})
+        res.status(404).render('login', {error})
+    } 
+} catch (error) {
+        res.status(404).render('register', {error})
         return;
-    }
+}
 })
 router.get('/logout', (req, res)=>{
     res.clearCookie(COOKIE_NAME);
