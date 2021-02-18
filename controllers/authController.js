@@ -49,4 +49,7 @@ router.get('/logout', (req, res)=>{
     res.clearCookie(COOKIE_NAME);
     res.redirect('/')
 })
+router.get('/profile', (req, res)=>{
+    res.render('profile', {title: 'Profile'})
+})
 module.exports = router;
