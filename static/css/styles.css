@@ -335,7 +335,7 @@ form div button:hover {
 .shoes {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content:center;
     align-items: baseline;
 }
 

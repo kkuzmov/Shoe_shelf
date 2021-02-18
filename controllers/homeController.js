@@ -1,10 +1,13 @@
 //CHECKED!!!
 const { Router } = require('express');
-
+const productService = require('../services/productService');
 const router = Router();
 
 router.get('/', (req, res) => {
-    res.render('home', {title: 'Home'});
+    productService.getAll()
+        .then(shoes =>{
+            res.render('home', {title: 'Home', shoes});
+        })
 })
 
 module.exports = router

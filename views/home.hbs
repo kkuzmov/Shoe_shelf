@@ -1,12 +1,16 @@
 <div class="container">
-    <div class="about-us">
-        {{#if isAuthenticated}}
+    {{#if isAuthenticated}}
+         <div class="shoes">
         {{#if shoes}}
+        {{#each shoes}}
         {{> shoe}}
+        {{/each}}
         {{else}}
         <span class="no-shoes">No shoes to display. Be the first to create a new offer...</span>
         {{/if}}
+         </div>
         {{else}}
+        <div class="about-us">
         <div>
             <img src="/img/shoes.jpg" alt="">
             <img src="/img/shoes2.jpg" alt="">
