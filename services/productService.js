@@ -20,7 +20,6 @@ async function getAll(query){
 async function getOne(id){
     return Shoe.findById(id).lean();
 }
- 
 function createProduct(data){
     let shoe = new Shoe({...data}); 
     return shoe.save()

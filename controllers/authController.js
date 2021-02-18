@@ -4,6 +4,7 @@ const router = Router();
 const { COOKIE_NAME } = require('../config/config');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 const isGuest = require('../middlewares/isGuest');
+const productService = require('../services/productService');
 
 //ВНИМАВАЙ С PATHNAMES - ПРОМЕНИ ГИ В ПАПКА VIEWS СЛЕД КАТО ГИ ПОЛУЧИШ!!!
 
@@ -53,6 +54,16 @@ router.get('/logout', (req, res)=>{
     res.redirect('/')
 })
 router.get('/profile', (req, res)=>{
-    res.render('profile', {title: 'Profile'})
+    let result = 0;
+    productService.getAll()
+        .then(shoes =>{
+            let email = req.user.email;
+            shoes = shoes.filter(shoe => shoe.buyers.includes(req.user._id));
+            shoes.forEach(shoe => {
+                result += shoe.price
+            });
+            res.render('profile', {title: 'Profile', shoes, result, email})
+
+        })
 })
 module.exports = router;

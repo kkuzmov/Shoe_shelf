@@ -27,7 +27,8 @@ router.get('/:productId/details', (req, res)=>{
         productService.getOne(req.params.productId)
            .then(shoe =>{
                 let isCreator = req.user._id === shoe.creator;
-                res.render('details', {title: 'Product details', shoe, isCreator})
+                let isBought = shoe.buyers.includes(req.user._id);
+                res.render('details', {title: 'Product details', shoe, isCreator, isBought})
            })
 })
 router.get('/:productId/edit', (req, res)=>{
@@ -41,6 +42,24 @@ router.post('/:productId/edit', (req, res)=>{
         productService.updateOne(req.params.productId, dataToSend)
            .then(shoe =>{
                 res.redirect(`/products/${req.params.productId}/details`);
+           })
+})
+router.get('/:productId/buy', (req, res)=>{
+        productService.getOne(req.params.productId)
+           .then(shoe =>{
+                let user = req.user;
+                let buyers = shoe.buyers;
+                buyers.push(user._id);
+                productService.updateOne(req.params.productId, {...shoe, buyers}) 
+                        .then(responseFromUpdate =>{
+                                res.redirect(`/products/${req.params.productId}/details`);
+                        })
+           })
+})
+router.get('/:productId/delete', (req, res)=>{
+        productService.deleteOne(req.params.productId)
+           .then(deleted =>{
+                res.redirect('/');
            })
 })
 
