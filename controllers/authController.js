@@ -1,15 +1,11 @@
 const { Router } = require('express');
-const authService = require('../services/authService');
 const router = Router();
 const { COOKIE_NAME } = require('../config/config');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 const isGuest = require('../middlewares/isGuest');
 const productService = require('../services/productService');
+const authService = require('../services/authService');
 
-//ВНИМАВАЙ С PATHNAMES - ПРОМЕНИ ГИ В ПАПКА VIEWS СЛЕД КАТО ГИ ПОЛУЧИШ!!!
-
-
-//ВТОРИЯТ ПАРАМЕТЪР НА .GET Е MIDDLEWARE - ВНИМАВАЙ ДАЛИ ГО ИЗПОЛЗВАШ!
 
 router.get('/login', isGuest, (req, res) => {
     res.render('login');
@@ -38,7 +34,7 @@ router.post('/register', isGuest,  async (req, res) => {
     try {
         let user = await authService.register({email, fullName, password});
     try {
-        let token = await authService.login({email, password})
+        let token = await authService.login({email, password});
         res.cookie(COOKIE_NAME, token);
         res.redirect('/')
     } catch (error) {
